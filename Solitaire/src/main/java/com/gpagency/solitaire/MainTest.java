@@ -26,12 +26,10 @@ public class MainTest {
         Paquet p = new Paquet();
         //p.setListe(jeu);
         p.shuffle();
-        System.out.println(p.toString());
-        p.reculerRouge();
-        System.out.println(p.toString());
-        p.permutationJoker();
-        System.out.println(p.toString());
-        
+        Operations o = new Operations();
+        o.fillFlux(p, 10);
+        System.out.println(o.toString());
+
     } 
     
 }

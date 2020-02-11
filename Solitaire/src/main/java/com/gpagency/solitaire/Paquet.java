@@ -57,8 +57,8 @@ public class Paquet {
         return s;
     }
     
-    //etape 1
-    public void reculerNoir(){
+    //recule joker noir
+    public void etape1(){
         int posJoker = this.getIndexOf(53);
         int stock=0;
         int poscarte = 0;
@@ -86,8 +86,8 @@ public class Paquet {
         }
     }
     
-    //etape 2
-    public void reculerRouge(){
+    //recule joker rouge
+    public void etape2(){
         int posJoker = this.getIndexOf(54);
         int stock=0;
         int poscarte = 0;
@@ -147,8 +147,8 @@ public class Paquet {
         }
     }
     
-    //etape 3
-    public void permutationJoker(){
+    //permutation jokers
+    public void etape3(){
         int pos1=0;
         int pos2=0;
         int i=0;
@@ -182,6 +182,29 @@ public class Paquet {
         
         this.setListe(permute);
         
+        
+    }
+    
+    //coupe
+    public void etape4(){
+        int val = this.getAtIndex(53);
+        int i=0;
+        ArrayList <Integer> permute=new ArrayList<Integer>();
+        
+        //si un joker est en dernier, ça sert à rien 
+        if(val==54 || val==53){
+            return;
+        }
+        
+        for(i=val; i<53; i++){
+            permute.add(jeu.get(i));
+        }
+        for(i=0; i<val; i++){
+            permute.add(jeu.get(i));
+        }
+        
+        permute.add(val);
+        this.setListe(permute);
         
     }
             
