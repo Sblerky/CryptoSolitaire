@@ -12,14 +12,61 @@ import java.util.ArrayList;
  * @author Jules
  */
 public class Operations {
-    ArrayList <Couple> flux=new ArrayList<Couple>();
+    private ArrayList <Couple> flux=new ArrayList<Couple>();
+    private ArrayList <Couple> base=new ArrayList<Couple>();
+    private ArrayList <Couple> code=new ArrayList<Couple>();
+    private ArrayList <Couple> decode=new ArrayList<Couple>();
+    private ArrayList <Character> texte=new ArrayList<Character>();
+    private int length;
     
-    public Operations(){
+    
+    public Operations(String s){
+        s=s.replaceAll("\\s", "ppp");
+        for (char c : s.toCharArray()) {
+            texte.add(c);
+          }
+        
+        length=texte.size();
         
     }
     
-    @Override
-    public String toString(){
+    public String getCode(){
+        String s="";
+        int i=0;
+        for(i=0; i<code.size(); i++){
+            s+=code.get(i).getLettre();
+        }
+        return s;
+    }
+    
+    public String getBase(){
+        String s="";
+        int i=0;
+        for(i=0; i<base.size(); i++){
+            s+=base.get(i).getLettre();
+        }
+        return s;
+    }
+    
+    public String getFlux(){
+        String s="";
+        int i=0;
+        for(i=0; i<flux.size(); i++){
+            s+=flux.get(i).getLettre();
+        }
+        return s;
+    }
+    
+    public String getDecode(){
+        String s="";
+        int i=0;
+        for(i=0; i<decode.size(); i++){
+            s+=decode.get(i).getLettre();
+        }
+        return s;
+    }
+    
+    public String fluxToString(){
         String s="";
         int i=0;
         for(i=0; i<flux.size(); i++){
@@ -29,7 +76,88 @@ public class Operations {
         return s;
     }
     
-    public void fillFlux(Paquet p, int length){
+    public String baseToString(){
+        String s="";
+        int i=0;
+        for(i=0; i<base.size(); i++){
+            s+=base.get(i).toString();
+            s+="\n";
+        }
+        return s;
+    }
+    
+    public String codeToString(){
+        String s="";
+        int i=0;
+        for(i=0; i<code.size(); i++){
+            s+=code.get(i).toString();
+            s+="\n";
+        }
+        return s;
+    }
+    
+    public String decodeToString(){
+        String s="";
+        int i=0;
+        for(i=0; i<decode.size(); i++){
+            s+=decode.get(i).toString();
+            s+="\n";
+        }
+        return s;
+    }
+    
+    public void fillCode(){
+        int l = base.size();
+        int i=0;
+        int m=0;
+        char c='!';
+        
+        for(i=0; i<l; i++){
+            m=base.get(i).getCode() + flux.get(i).getCode();
+            if(m>26){
+                m=m-26;
+            }
+            
+            c=this.charFromInt(m);
+            Couple cp = new Couple(m,c);
+            code.add(cp);
+            
+        }
+    }
+    
+    public void fillDecode(){
+        int l = base.size();
+        int i=0;
+        int m=0;
+        char c='!';
+        
+        for(i=0; i<l; i++){
+            m=code.get(i).getCode() - flux.get(i).getCode();
+            if(m<0){
+                m=m+26;
+            }
+            
+            c=this.charFromInt(m);
+            Couple cp = new Couple(m,c);
+            decode.add(cp);
+            
+        }
+    }
+    
+    public void fillBase(){
+        int l = texte.size();
+        int i=0;
+        int m=0;
+        char c='!';
+        for(i=0; i<l; i++){
+            c=texte.get(i);
+            m=this.intFromChar(c);
+            Couple cp = new Couple(m,c);
+            base.add(cp);
+        }
+    }
+    
+    public void fillFlux(Paquet p){
         int n=0;
         int m=0;
         int i=0;
@@ -180,6 +308,121 @@ public class Operations {
                 break;
         }
         return c;
+    }
+    
+    public int  intFromChar(char c){
+        int i=-1;
+        
+        switch(c){
+            case 'a':
+                i=1;
+                break;
+            
+            case 'b':
+                i=2;
+                break;
+            
+            case 'c':
+                i=3;
+                break;
+            
+            case 'd':
+                i=4;
+                break;
+                
+            case 'e':
+                i=5;
+                break;
+            
+            case 'f':
+                i=6;
+                break;
+            
+            case 'g':
+                i=7;
+                break;
+            
+            case 'h':
+                i=8;
+                break;
+                
+            case 'i':
+                i=9;
+                break;
+            
+            case 'j':
+                i=10;
+                break;
+            
+            case 'k':
+                i=11;
+                break;
+            
+            case 'l':
+                i=12;
+                break;
+                
+            case 'm':
+                i=13;
+                break;
+            
+            case 'n':
+                i=14;
+                break;
+            
+            case 'o':
+                i=15;
+                break;
+            
+            case 'p':
+                i=16;
+                break;
+                
+            case 'q':
+                i=17;
+                break;
+            
+            case 'r':
+                i=18;
+                break;
+            
+            case 's':
+                i=19;
+                break;
+            
+            case 't':
+                i=20;
+                break;
+                
+            case 'u':
+                i=21;
+                break;
+            
+            case 'v':
+                i=22;
+                break;
+            
+            case 'w':
+                i=23;
+                break;
+            
+            case 'x':
+                i=24;
+                break;
+                
+            case 'y':
+                i=25;
+                break;
+            
+            case 'z':
+                i=26;
+                break;
+            
+            default:
+                i=-1;
+                break;
+        }
+        return i;
     }
     
 }
