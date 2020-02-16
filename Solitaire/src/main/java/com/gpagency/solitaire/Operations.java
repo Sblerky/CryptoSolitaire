@@ -18,16 +18,46 @@ public class Operations {
     private ArrayList <Couple> decode=new ArrayList<Couple>();
     private ArrayList <Character> texte=new ArrayList<Character>();
     private int length;
+    private String message;
+    private String message_trans;
+    private Paquet p;
     
     
-    public Operations(String s){
+    public Operations(String s, Paquet p){
+        message=s;
+        this.p=new Paquet(p.getListe());
         s=s.replaceAll("\\s", "ppp");
+        
         for (char c : s.toCharArray()) {
             texte.add(c);
           }
         
         length=texte.size();
         
+    }
+    
+    public void code(){
+        this.fillFlux(p);
+        this.fillBase();
+        this.fillCode();
+        message_trans=this.getCode();
+        message_trans=message_trans.replaceAll("ppp", "\\s");
+    }
+    
+    public void decode(){
+        this.fillFlux(p);
+        this.fillBase();
+        this.fillDecode();
+        message_trans=this.getDecode();
+        message_trans=message_trans.replaceAll("ppp", " ");
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getMessage_trans() {
+        return message_trans;
     }
     
     public String getCode(){
@@ -106,6 +136,7 @@ public class Operations {
         return s;
     }
     
+    //rempli la liste avec le message codé
     public void fillCode(){
         int l = base.size();
         int i=0;
@@ -125,6 +156,7 @@ public class Operations {
         }
     }
     
+    //rempli la liste avec le message décodé
     public void fillDecode(){
         int l = base.size();
         int i=0;
@@ -132,7 +164,7 @@ public class Operations {
         char c='!';
         
         for(i=0; i<l; i++){
-            m=code.get(i).getCode() - flux.get(i).getCode();
+            m=base.get(i).getCode() - flux.get(i).getCode();
             if(m<0){
                 m=m+26;
             }
@@ -144,6 +176,7 @@ public class Operations {
         }
     }
     
+    //rempli la liste avec le texte de base
     public void fillBase(){
         int l = texte.size();
         int i=0;
@@ -157,6 +190,7 @@ public class Operations {
         }
     }
     
+    //rempli la liste avec le flux
     public void fillFlux(Paquet p){
         int n=0;
         int m=0;

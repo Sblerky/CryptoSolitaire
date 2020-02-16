@@ -26,6 +26,15 @@ public class Paquet {
         }
     }
     
+    public Paquet(ArrayList <Integer> pjeu){
+        jeu=new ArrayList<Integer>();
+        int i=0;
+        for(i=0; i<54; i++){
+            jeu.add(pjeu.get(i));
+        }
+        
+    }
+    
     public void setListe(ArrayList l){
         this.jeu=l;
     }
