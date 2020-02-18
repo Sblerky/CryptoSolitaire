@@ -12,6 +12,7 @@ package com.gpagency.solitaire;
 public class VueMain extends javax.swing.JFrame {
 
     private Paquet paquet;
+    private PaquetUses p_use;
     private Operations o_code;
     private Operations o_decode;
     private String message;
@@ -20,6 +21,7 @@ public class VueMain extends javax.swing.JFrame {
      */
     public VueMain() {
         paquet=new Paquet();
+        p_use = new PaquetUses(paquet);
         initComponents();
         TexteOrdre.setText(paquet.toString());
     }
@@ -118,20 +120,25 @@ public class VueMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         paquet.shuffle();
         //tester si le paquet a déjà été fait
-        TexteOrdre.setText(paquet.toString());
+        if(!p_use.isUsed(new Paquet(paquet.getJeu()))){
+            TexteOrdre.setText(paquet.toString());
         
-        o_code=new Operations(TextMessage.getText(), paquet);
-        
-        
-        o_code.code();
-        String text_code="Message : "+TextMessage.getText()+"\n\n////////////\n\nFlux : \n"+o_code.fluxToString()+"////////////\n\nCode : \n"+o_code.getMessage_trans();
-        TextCode.setText(text_code);
-        
-        o_decode=new Operations(o_code.getMessage_trans(), paquet);
-        o_decode.decode();
-        
-        String text_decode="Message : "+o_code.getMessage_trans()+"\n\n////////////\n\nFlux : \n"+o_decode.fluxToString()+"////////////\n\nDecode : \n"+o_decode.getMessage_trans();
-        TextDecode.setText(text_decode);
+            o_code=new Operations(TextMessage.getText(), paquet);
+
+
+            o_code.code();
+            String text_code="Message : "+TextMessage.getText()+"\n\n////////////\n\nFlux : \n"+o_code.fluxToString()+"////////////\n\nCode : \n"+o_code.getMessage_trans();
+            TextCode.setText(text_code);
+
+            o_decode=new Operations(o_code.getMessage_trans(), paquet);
+            o_decode.decode();
+
+            String text_decode="Message : "+o_code.getMessage_trans()+"\n\n////////////\n\nFlux : \n"+o_decode.fluxToString()+"////////////\n\nDecode : \n"+o_decode.getMessage_trans();
+            TextDecode.setText(text_decode);
+        }
+        else{
+            TextCode.setText("Cet ordre a déjà été utilisé");
+        }
         
         
         

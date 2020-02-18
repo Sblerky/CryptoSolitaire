@@ -6,6 +6,7 @@
 package com.gpagency.solitaire;
 
 import java.util.ArrayList;
+import java.text.Normalizer;
 
 /**
  *
@@ -26,6 +27,9 @@ public class Operations {
     public Operations(String s, Paquet p){
         message=s;
         this.p=new Paquet(p.getListe());
+        s=Normalizer.normalize(s, Normalizer.Form.NFD);
+        s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        s=s.toLowerCase();
         s=s.replaceAll("\\s", "ppp");
         
         for (char c : s.toCharArray()) {

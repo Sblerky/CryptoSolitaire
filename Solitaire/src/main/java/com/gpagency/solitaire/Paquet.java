@@ -14,6 +14,10 @@ import java.util.Collections;
  */
 public class Paquet {
     private ArrayList <Integer> jeu;
+
+    public ArrayList<Integer> getJeu() {
+        return jeu;
+    }
     
     //Initialisation du paquet selon l'ordre du Bridge
     //Joker Noir = 53
@@ -62,8 +66,22 @@ public class Paquet {
         for(i=0; i<54; i++){
             s+=jeu.get(i);
             s+=" ";
+            if(i==18|| i==36){
+               s+="\n"; 
+            }
         }
         return s;
+    }
+    
+    public boolean isEqual(Paquet p){
+        boolean equal=true;
+        ArrayList <Integer> p_liste = p.getJeu();
+        int i=0;
+        for(i=0; i<54; i++){
+            if(this.jeu.get(i) != p_liste.get(i))
+                equal=false;
+        }
+        return equal;
     }
     
     //recule joker noir
