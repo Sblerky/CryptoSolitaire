@@ -42,6 +42,7 @@ public class VueMain extends javax.swing.JFrame {
         LabelOrdre = new javax.swing.JLabel();
         OrdreScroll = new javax.swing.JScrollPane();
         TexteOrdre = new javax.swing.JTextArea();
+        BoutonPaquets = new javax.swing.JButton();
         LabelText = new javax.swing.JLabel();
         TextMessageScroll = new javax.swing.JScrollPane();
         TextMessage = new javax.swing.JTextArea();
@@ -60,7 +61,7 @@ public class VueMain extends javax.swing.JFrame {
 
         PanelMain.add(TextCodeScroll);
 
-        PanelUser.setLayout(new java.awt.GridLayout(5, 1));
+        PanelUser.setLayout(new java.awt.GridLayout(6, 1));
 
         LabelOrdre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelOrdre.setText("Ordre :");
@@ -74,6 +75,14 @@ public class VueMain extends javax.swing.JFrame {
         OrdreScroll.setViewportView(TexteOrdre);
 
         PanelUser.add(OrdreScroll);
+
+        BoutonPaquets.setText("Voir les paquets uilisés");
+        BoutonPaquets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonPaquetsActionPerformed(evt);
+            }
+        });
+        PanelUser.add(BoutonPaquets);
 
         LabelText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelText.setText("Tapez votre message :");
@@ -121,6 +130,7 @@ public class VueMain extends javax.swing.JFrame {
         paquet.shuffle();
         //tester si le paquet a déjà été fait
         if(!p_use.isUsed(new Paquet(paquet.getJeu()))){
+            p_use.add(new Paquet(paquet.getJeu()));
             TexteOrdre.setText(paquet.toString());
         
             o_code=new Operations(TextMessage.getText(), paquet);
@@ -145,6 +155,13 @@ public class VueMain extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_BoutonLaunchActionPerformed
+
+    private void BoutonPaquetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPaquetsActionPerformed
+        // TODO add your handling code here:
+        VueUses vu=new VueUses(p_use);
+        vu.setVisible(true);
+        
+    }//GEN-LAST:event_BoutonPaquetsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,6 +200,7 @@ public class VueMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoutonLaunch;
+    private javax.swing.JButton BoutonPaquets;
     private javax.swing.JLabel LabelOrdre;
     private javax.swing.JLabel LabelText;
     private javax.swing.JScrollPane OrdreScroll;

@@ -30,7 +30,20 @@ public class Operations {
         s=Normalizer.normalize(s, Normalizer.Form.NFD);
         s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
         s=s.toLowerCase();
+        //toutes nos exceptions
         s=s.replaceAll("\\s", "ppp");
+        s=s.replaceAll("0", "zzzz");
+        s=s.replaceAll("1", "uuuu");
+        s=s.replaceAll("2", "dddd");
+        s=s.replaceAll("3", "tttt");
+        s=s.replaceAll("4", "qqqq");
+        s=s.replaceAll("5", "cccc");
+        s=s.replaceAll("6", "xxxx");
+        s=s.replaceAll("7", "ssss");
+        s=s.replaceAll("8", "hhhh");
+        s=s.replaceAll("9", "nnnn");
+        //et le reste on le vire
+        s=s.replaceAll("[^a-zA-Z ]", "");
         
         for (char c : s.toCharArray()) {
             texte.add(c);
@@ -45,7 +58,6 @@ public class Operations {
         this.fillBase();
         this.fillCode();
         message_trans=this.getCode();
-        message_trans=message_trans.replaceAll("ppp", "\\s");
     }
     
     public void decode(){
@@ -54,6 +66,16 @@ public class Operations {
         this.fillDecode();
         message_trans=this.getDecode();
         message_trans=message_trans.replaceAll("ppp", " ");
+        message_trans=message_trans.replaceAll("zzzz", "0");
+        message_trans=message_trans.replaceAll("uuuu", "1");
+        message_trans=message_trans.replaceAll("dddd", "2");
+        message_trans=message_trans.replaceAll("tttt", "3");
+        message_trans=message_trans.replaceAll("qqqq", "4");
+        message_trans=message_trans.replaceAll("cccc", "5");
+        message_trans=message_trans.replaceAll("xxxx", "6");
+        message_trans=message_trans.replaceAll("ssss", "7");
+        message_trans=message_trans.replaceAll("hhhh", "8");
+        message_trans=message_trans.replaceAll("nnnn", "9");
     }
 
     public String getMessage() {
@@ -169,7 +191,7 @@ public class Operations {
         
         for(i=0; i<l; i++){
             m=base.get(i).getCode() - flux.get(i).getCode();
-            if(m<0){
+            if(m<=0){
                 m=m+26;
             }
             

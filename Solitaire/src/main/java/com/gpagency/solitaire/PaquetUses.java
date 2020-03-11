@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class PaquetUses {
     private ArrayList <Paquet> liste;
+
+    public ArrayList<Paquet> getListe() {
+        return liste;
+    }
     
     public PaquetUses(Paquet p){
         liste = new ArrayList <Paquet>();

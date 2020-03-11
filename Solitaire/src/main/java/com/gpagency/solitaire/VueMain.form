@@ -60,7 +60,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="1"/>
-            <Property name="rows" type="int" value="5"/>
+            <Property name="rows" type="int" value="6"/>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="LabelOrdre">
@@ -87,6 +87,14 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="BoutonPaquets">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Voir les paquets uilis&#xe9;s"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BoutonPaquetsActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JLabel" name="LabelText">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
