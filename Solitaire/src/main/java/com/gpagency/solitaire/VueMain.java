@@ -49,6 +49,9 @@ public class VueMain extends javax.swing.JFrame {
         BoutonLaunch = new javax.swing.JButton();
         TextDecodeScroll = new javax.swing.JScrollPane();
         TextDecode = new javax.swing.JTextArea();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        Fichier = new javax.swing.JMenu();
+        OpenFich = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,6 +114,20 @@ public class VueMain extends javax.swing.JFrame {
 
         PanelMain.add(TextDecodeScroll);
 
+        Fichier.setText("File");
+
+        OpenFich.setText("Charger un fichier");
+        OpenFich.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpenFichActionPerformed(evt);
+            }
+        });
+        Fichier.add(OpenFich);
+
+        jMenuBar1.add(Fichier);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,7 +136,7 @@ public class VueMain extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
         );
 
         pack();
@@ -163,6 +180,12 @@ public class VueMain extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BoutonPaquetsActionPerformed
 
+    private void OpenFichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenFichActionPerformed
+        // TODO add your handling code here:
+        VueFichier vf=new VueFichier(paquet);
+        vf.setVisible(true);
+    }//GEN-LAST:event_OpenFichActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -201,8 +224,10 @@ public class VueMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoutonLaunch;
     private javax.swing.JButton BoutonPaquets;
+    private javax.swing.JMenu Fichier;
     private javax.swing.JLabel LabelOrdre;
     private javax.swing.JLabel LabelText;
+    private javax.swing.JMenuItem OpenFich;
     private javax.swing.JScrollPane OrdreScroll;
     private javax.swing.JPanel PanelMain;
     private javax.swing.JPanel PanelUser;
@@ -213,5 +238,6 @@ public class VueMain extends javax.swing.JFrame {
     private javax.swing.JTextArea TextMessage;
     private javax.swing.JScrollPane TextMessageScroll;
     private javax.swing.JTextArea TexteOrdre;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
