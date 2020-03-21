@@ -28,12 +28,12 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="Lire">
       <Properties>
-        <Property name="text" type="java.lang.String" value="text.txt"/>
+        <Property name="text" type="java.lang.String" value="texte.txt"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="Ecrire">
       <Properties>
-        <Property name="text" type="java.lang.String" value="text.txt"/>
+        <Property name="text" type="java.lang.String" value="code.txt"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

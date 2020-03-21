@@ -5,6 +5,8 @@
  */
 package com.gpagency.solitaire;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,12 +21,12 @@ public class VueFichier extends javax.swing.JFrame {
     /**
      * Creates new form VueFichier
      */
-    private Paquet p;
+    private Paquet paquet;
     private boolean used = false;
     private Operations op;
     
     public VueFichier(Paquet p) {
-        p=new Paquet(p.getJeu());
+        paquet=new Paquet(p.getJeu());
         initComponents();
     }
 
@@ -47,10 +49,10 @@ public class VueFichier extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(2, 2));
 
-        Lire.setText("text.txt");
+        Lire.setText("texte.txt");
         getContentPane().add(Lire);
 
-        Ecrire.setText("text.txt");
+        Ecrire.setText("code.txt");
         getContentPane().add(Ecrire);
 
         Indic.setEditable(false);
@@ -81,22 +83,63 @@ public class VueFichier extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DecoderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecoderActionPerformed
-        // TODO add your handling code here:
+        String content = "vide";
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        System.out.println("Current relative path is: " + s);
+        try{
+            content = new String(Files.readAllBytes(Paths.get(Lire.getText())), StandardCharsets.UTF_8);
+        }catch(Exception e){
+            Indic.setText("Fichier à lire absent");
+        }
+        
+        Operations o_code=new Operations(content, this.paquet);
+        o_code.decode();
+        String text_code=o_code.getMessage_trans();
+        
+        File transf = new File(Ecrire.getText());
+        try{
+            transf.createNewFile(); 
+        }catch(Exception e){
+            Indic.setText("Problème lors de la création du fichier");
+        }
+        
+        try (PrintWriter out = new PrintWriter(Ecrire.getText())) {
+            out.println(text_code);
+        }catch(Exception e){
+            Indic.setText("Problème lors de l'écriture");
+        }
     }//GEN-LAST:event_DecoderActionPerformed
 
     private void CoderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CoderActionPerformed
         // TODO add your handling code here:
         String content = "vide";
-        try{
-            content = Files.readString(Paths.get(Lire.getText()), StandardCharsets.US_ASCII);
-        }catch(Exception e){
-            Indic.setText("Fichier à lire absent");
-        }
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
         System.out.println("Current relative path is: " + s);
-        System.out.println(Lire.getText());
-        System.out.println(content);
+        try{
+            content = new String(Files.readAllBytes(Paths.get(Lire.getText())), StandardCharsets.UTF_8);
+        }catch(Exception e){
+            Indic.setText("Fichier à lire absent");
+        }
+        
+        Operations o_code=new Operations(content, this.paquet);
+        o_code.code();
+        String text_code=o_code.getMessage_trans();
+        
+        File transf = new File(Ecrire.getText());
+        try{
+            transf.createNewFile(); 
+        }catch(Exception e){
+            Indic.setText("Problème lors de la création du fichier");
+        }
+        
+        try (PrintWriter out = new PrintWriter(Ecrire.getText())) {
+            out.println(text_code);
+        }catch(Exception e){
+            Indic.setText("Problème lors de l'écriture");
+        }
+
     }//GEN-LAST:event_CoderActionPerformed
 
     /**
