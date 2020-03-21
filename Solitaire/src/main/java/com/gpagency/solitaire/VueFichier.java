@@ -5,6 +5,11 @@
  */
 package com.gpagency.solitaire;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  *
  * @author Jules
@@ -35,7 +40,7 @@ public class VueFichier extends javax.swing.JFrame {
         Lire = new javax.swing.JTextField();
         Ecrire = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Indic = new javax.swing.JTextArea();
         Coder = new javax.swing.JButton();
         Decoder = new javax.swing.JButton();
 
@@ -48,15 +53,20 @@ public class VueFichier extends javax.swing.JFrame {
         Ecrire.setText("text.txt");
         getContentPane().add(Ecrire);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Première case : \nNom du fichier à lire\n\nDeuxième case :\nNom du fichier à écrire");
-        jScrollPane1.setViewportView(jTextArea1);
+        Indic.setEditable(false);
+        Indic.setColumns(20);
+        Indic.setRows(5);
+        Indic.setText("Première case : \nNom du fichier à lire\n\nDeuxième case :\nNom du fichier à écrire");
+        jScrollPane1.setViewportView(Indic);
 
         getContentPane().add(jScrollPane1);
 
         Coder.setText("Coder");
+        Coder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CoderActionPerformed(evt);
+            }
+        });
         getContentPane().add(Coder);
 
         Decoder.setText("Décoder");
@@ -74,6 +84,21 @@ public class VueFichier extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DecoderActionPerformed
 
+    private void CoderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CoderActionPerformed
+        // TODO add your handling code here:
+        String content = "vide";
+        try{
+            content = Files.readString(Paths.get(Lire.getText()), StandardCharsets.US_ASCII);
+        }catch(Exception e){
+            Indic.setText("Fichier à lire absent");
+        }
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        System.out.println("Current relative path is: " + s);
+        System.out.println(Lire.getText());
+        System.out.println(content);
+    }//GEN-LAST:event_CoderActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -83,8 +108,8 @@ public class VueFichier extends javax.swing.JFrame {
     private javax.swing.JButton Coder;
     private javax.swing.JButton Decoder;
     private javax.swing.JTextField Ecrire;
+    private javax.swing.JTextArea Indic;
     private javax.swing.JTextField Lire;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
